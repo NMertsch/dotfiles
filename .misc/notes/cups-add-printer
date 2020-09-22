@@ -1,0 +1,6 @@
+sudo apt install -y cups
+sudo usermod -aG lpadmin $USER
+# logout, login (to have groups actually changed)
+firefox http://localhost:631/admin  # CUPS admin page
+# add printer
+

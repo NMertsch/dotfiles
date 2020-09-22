@@ -1,0 +1,11 @@
+xterm*utf8: 1
+xterm*internalBorder: 0
+xterm*borderWidth: 0
+xterm*fastScroll: true
+xterm.vt100.backarrowKey: false
+xterm.ttyModes: erase ^?
+xterm.vt100.metaSendsEscape: true
+xterm.vt100.faceName: DejaVu Mono:size=11:antialias=true
+xterm*VT100.Translations: #override \
+    Ctrl Shift <Key>V: insert-selection(CLIPBOARD) \n\
+    Ctrl Shift <Key>C: copy-selection(CLIPBOARD)

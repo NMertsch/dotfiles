@@ -1,0 +1,5 @@
+#!/bin/bash
+
+num_monitors=$(xrandr -q | grep -c " connected")
+wallpaper_files=$(find ~/img/wallpapers/* | shuf -n $num_monitors)
+feh --bg-fill $wallpaper_files

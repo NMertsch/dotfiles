@@ -1,0 +1,3 @@
+sudo -i
+nano /etc/default/avahi-daemon
+-> AVAHI_DAEMON_DETECT_LOCAL=0

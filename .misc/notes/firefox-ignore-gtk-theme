@@ -1,0 +1,12 @@
+# problem: when using a dark gtk theme, firefox will render some fields dark, but keeps the dark font.
+# solution: let firefox use a light gtk theme (e.g. Adwaita, if using Adwaita-Dark)
+
+# open firefox config
+firefox about:config
+
+# if asked, "I accept the risk!"
+# right click -> New String
+Name: widget.content.gtk-theme-override
+Value: Adwaita
+
+# restart firefox

@@ -1,0 +1,5 @@
+$include /etc/inputrc
+
+set bell-style visible
+set mark-directories on
+set mark-symlinked-directories on

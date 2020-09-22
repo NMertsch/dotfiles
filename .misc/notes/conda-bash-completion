@@ -1,0 +1,6 @@
+# 08.01.2020
+# as of today, there is no official bash completion in conda, but this user-provided package
+# read more about it here:
+# https://github.com/conda/conda/issues/9178
+
+conda install -c tartansandal conda-bash-completion

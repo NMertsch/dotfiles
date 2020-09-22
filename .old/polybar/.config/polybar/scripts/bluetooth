@@ -1,0 +1,17 @@
+#!/bin/sh
+icon="%{T5}%{T1}"
+color=polybar.color_highlight
+
+timeout 3 bluetoothctl show >/dev/null || exit 1
+
+if [ $(bluetoothctl show | grep "Powered: yes" | wc -c) -eq 0 ]; then
+    color="polybar.text_alt"
+else
+    if [ $(bluetoothctl info | grep 'Device' | wc -c) -eq 0 ]; then
+        color="polybar.text"
+    else
+        color="polybar.highlight"
+    fi
+fi
+
+echo "%{F$(xrdb-get $color)}$icon%{F-}"

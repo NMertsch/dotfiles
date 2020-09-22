@@ -1,0 +1,5 @@
+# https://askubuntu.com/questions/845205/how-to-play-dvds-in-ubuntu-16-04
+sudo apt-get install libdvd-pkg
+sudo dpkg-reconfigure libdvd-pkg
+sudo apt-get install regionset
+regionset # -> 2

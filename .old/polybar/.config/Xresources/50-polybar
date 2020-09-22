@@ -1,0 +1,8 @@
+! Polybar
+polybar.background: gui_bg_content
+polybar.background_alt: gui_bg
+polybar.text: gui_text_content
+polybar.text_alt: gui_text_content_inactive
+polybar.highlight: gui_highlight
+polybar.alert: term_red
+polybar.border: gui_border

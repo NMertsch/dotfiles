@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# https://gitlab.gwdg.de/help/ssh/README
+# 01.01.2020
+
+# generate key on client machine
+echo -n "Name of SSH key: "
+read comment
+ssh-keygen -t ed25519 -C "$comment"
+
+# add key to gitlab account
+key_file=~/.ssh/id_ed25519.pub
+echo "Public key:"
+cat $key_file
+xclip -sel clip < $key_file
+echo "The public key was pasted into your clipboard."
+echo "Open your account settings on GitLab and add the key to your 'SSH Keys'"

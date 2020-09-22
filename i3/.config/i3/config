@@ -1,0 +1,241 @@
+# Workspace names
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Macros
+set $run_menu "rofi -show drun -display-drun 'Run'"
+set $window_switcher "rofi -show window -display-window 'Window'"
+set $exit ~/.config/i3/scripts/exit.sh
+set $mount ~/.config/i3/scripts/mount.sh
+set $unmount ~/.config/i3/scripts/unmount.sh
+set $screenshot ~/.config/i3/scripts/screenshot.sh
+set $showVolume ~/.config/i3/scripts/showVolume.sh
+set $exec_no_urgency ~/.config/i3/scripts/exec_no_urgency.sh
+set $displayselect displayselect
+set $dropdown "urxvt-client -title dropdown"
+set $math urxvt-client -title "math dropdown" -e bash -c '~/miniconda3/envs/math/bin/python -i ~/.config/i3/scripts/math-dropdown.py'
+set $move_to_new_ws ~/.config/i3/scripts/i3-move-to-new-workspace
+
+# Basics keybinds
+set $mod Mod4
+floating_modifier $mod
+bindsym $mod+Return exec x-terminal-emulator
+bindsym $mod+Shift+q kill
+bindsym $mod+F4 kill
+bindsym Mod1+F4 kill
+bindsym --release button2 kill
+bindsym $mod+d exec $run_menu
+bindsym $mod+Tab exec $window_switcher
+bindsym XF86PowerOff nop
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec $exit
+bindsym Print exec "$screenshot -s"
+bindsym Shift+Print exec $screenshot
+bindsym $mod+n exec $mount
+bindsym $mod+Shift+n exec $unmount
+bindsym $mod+Shift+Ctrl+r exec $displayselect
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# move focused window to new workspace on different output
+bindsym $mod+z exec $move_to_new_ws
+bindsym $mod+Shift+z exec $move_to_new_ws --move
+
+# move active workspace
+bindsym $mod+Shift+Ctrl+Left move workspace to output left
+bindsym $mod+Shift+Ctrl+h move workspace to output left
+bindsym $mod+Shift+Ctrl+Right move workspace to output right
+bindsym $mod+Shift+Ctrl+l move workspace to output right
+
+# change orientation (horizontal/vertical)
+bindsym $mod+b split h
+bindsym $mod+v split v
+
+# fullscreen
+bindsym $mod+f fullscreen toggle
+
+# change container layout
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle; move position center
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+bindsym $mod+Shift+a focus child
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# Resize
+bindsym $mod+Ctrl+Left resize grow width 10 px or 5 ppt
+bindsym $mod+Ctrl+Down resize shrink height 10 px or 5 ppt
+bindsym $mod+Ctrl+Up resize grow height 10 px or 5 ppt
+bindsym $mod+Ctrl+Right resize shrink width 10 px or 5 ppt
+bindsym $mod+Ctrl+h resize grow width 10 px or 5 ppt
+bindsym $mod+Ctrl+j resize shrink height 10 px or 5 ppt
+bindsym $mod+Ctrl+k resize grow height 10 px or 5 ppt
+bindsym $mod+Ctrl+l resize shrink width 10 px or 5 ppt
+
+# Appearance
+font pango:Noto Sans Bold 9
+hide_edge_borders smart
+default_floating_border normal
+title_align center
+default_border pixel 2
+## force some gnome apps to have the same border...
+for_window [class=".*"] border pixel 2
+
+# Behaviour
+focus_follows_mouse no
+mouse_warping none
+popup_during_fullscreen smart
+force_display_urgency_hint 500 ms
+no_focus [window_role="pop-up"]
+workspace_auto_back_and_forth yes
+
+# Media keys
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 2%+ && $showVolume -i audio-volume-high
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 2%- && $showVolume -i audio-volume-low
+bindsym XF86AudioMute exec --no-startup-id amixer -D pulse sset Master toggle && $showVolume -i audio-volume-muted
+# https://askubuntu.com/a/1114872 for enabling xbacklight
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
+
+# Workspace assignments
+assign [class="thunderbird"] $ws4
+for_window [class="thunderbird"] layout tabbed
+assign [class="Thunderbird"] $ws4
+for_window [class="Thunderbird"] layout tabbed
+
+# Floating
+for_window [class="Nitrogen"] floating enable
+for_window [class="System-config-printer"] floating enable
+for_window [class="Gpick"] floating enable
+for_window [class="Nm-connection-editor"] floating enable
+for_window [class="Lxappearance"] floating enable
+for_window [class="Blueman-manager"] floating enable
+for_window [window_role="About"] floating enable
+for_window [class="Pavucontrol"] floating enable
+for_window [class="Gnome-alsamixer"] floating enable
+for_window [class="Arandr"] floating enable
+for_window [class="Yad"] floating enable
+for_window [window_type="popup_menu"] floating enable
+for_window [class="xscreensaver-demo"] floating enable
+for_window [title="screenshot_viewer"] floating enable
+for_window [instance="guvcview"] floating enable
+for_window [title="Event Tester"] floating enable
+## Knime
+for_window [class="Chromium-browser" instance="knime"] floating enable
+for_window [class="org-eclipse-equinox-launcher-Main" instance="sun-awt-X11-XFramePeer"] floating enable
+for_window [class="org-eclipse-equinox-launcher-Main" instance="sun-awt-X11-XDialogPeer"] floating enable
+## Zoom
+for_window [class="zoom" title="Settings"] floating enable
+## matplotlib plots
+for_window [class="matplotlib"] floating enable
+for_window [class="Matplotlib"] floating enable
+for_window [class=" " instance=" " title="^Figure"] floating enable
+## JetBrains IDE (IntelliJ, PyCharm, ...) loading screen
+for_window [title="^win0$"] floating enable
+
+# Colors
+set_from_resource $bg i3.background
+set_from_resource $bg_alt i3.background_alt
+set_from_resource $highlight i3.highlight
+set_from_resource $text i3.text
+set_from_resource $text_inactive i3.text_inactive
+set_from_resource $border_alt i3.border_alt
+set_from_resource $border i3.border
+set_from_resource $urgent i3.urgent
+#                       border      background text           indicator  child_border
+client.focused          $highlight  $highlight $text          $highlight $highlight
+client.focused_inactive $bg_alt     $bg_alt    $text          $bg_alt    $border
+client.unfocused        $bg         $bg        $text_inactive $bg        $border
+client.urgent           $urgent     $urgent    $text          $urgent    $border
+client.placeholder      $bg         $bg        $text          $bg        $border
+client.background       $bg
+
+# layout scripts
+bindsym $mod+c exec ~/.config/i3/scripts/columns.sh
+
+# scratchpad tools
+## python for math and stuff
+## Mod+m        show/hide
+## Mod+Shift+m  open (is opened once after login)
+## NOTE: xterm -e [cmd] sets the title to [cmd]
+exec --no-startup-id $math
+bindsym $mod+m [title="math dropdown"] scratchpad show; [title="math dropdown"] move position center
+bindsym $mod+Shift+m exec $math
+for_window [title="math dropdown"] floating enable
+for_window [title="math dropdown"] resize set 625 400
+for_window [title="math dropdown"] move scratchpad
+for_window [title="math dropdown"] border pixel 5
+
+## simple xterm
+## Mod+p        show/hide
+## Mod+Shift+p  open (is opened once after login)
+exec --no-startup-id $dropdown
+bindsym $mod+p [title="^dropdown$"] scratchpad show; [title="^dropdown$"] move position center
+bindsym $mod+Shift+p exec $dropdown
+for_window [title="^dropdown$"] floating enable
+for_window [title="^dropdown$"] resize set 625 400
+for_window [title="^dropdown$"] move scratchpad
+for_window [title="^dropdown$"] border pixel 5
+
+# autostart
+exec --no-startup-id ~/bin/polybar-launch
+exec --no-startup-id $exec_no_urgency thunderbird
+exec --no-startup-id numlockx on
+exec --no-startup-id dunst
+exec --no-startup-id $displayselect --auto

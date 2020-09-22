@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# basics
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+
+alias mv="mv -v"
+alias rm="rm -vf"
+alias cp="cp -v"
+alias mkdir="mkdir -vp"
+
+alias l="ls"
+alias ll='ls -AhHlF'
+
+# internet
+alias yt='youtube-dl --add-metadata -ic'  # download video
+alias yta='youtube-dl --add-metadata -ica'  # download audio
+mpv-twitch() {
+    i3-msg exec "mpv https://twitch.tv/$1"
+}
+mpv-video() {
+    i3-msg exec "mpv '$1'"
+}
+
+# workaround so that aliases work with sudo
+alias sudo="sudo "

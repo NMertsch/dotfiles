@@ -1,0 +1,79 @@
+# misc
+.git/
+.gitignore
+
+# commands
+git init
+git clone ADDRESS [LOCATION]
+git status
+git add FILES
+git log
+git commit -m "message"
+git reset  # reset staging area to working directory
+git diff  # file, files, commit-hashes, ...
+
+# working with remotes
+git remote add NAME ADDRESS
+git remote remove NAME
+git remote -v  # list remotes
+git push -u NAME BRANCH  # -u means --set-upstream, only needed once (associate local branch with remote branch)
+
+# working with branches
+git branch  # list local branches
+git branch BRANCH  # create new branch
+git checkout BRANCH  # change working directory to branch
+git branch -a  # list local and remote branches
+git branch --no-merged  # list branches that are not merged
+git merge BRANCH  # merge branch into working directory
+git branch -d BRANCH  # delete local branch
+git push origin --delete BRANCH  # delete remote branch
+
+# workflow with feature branch
+git pull origin master
+git branch BRANCH
+git checkout BRANCH
+[do stuff]
+git commit -m "did stuff"
+git push -u origin BRANCH
+git checkout master
+git pull origin master
+git merge BRANCH
+git push origin master
+
+# git reset modes
+git reset --soft COMMIT-HASH  # reverses commit, but keeps changes in staging area
+git reset COMMIT-HASH  # "mixed", reverses commit, but keeps changes in working directory (unstaged)
+git reset --hard COMMIT-HASH  # reverses commit and removes all changes to tracked files
+
+# git stash: keep changes on branch for later (without commit)
+## can be used to carry changes from one branch to another
+git stash save "message"  # reset working directory
+git stash list
+git stash apply STACH-ID  # does not remove the stash
+git stash pop  # apply changes of first ("top") stash, removes it
+git stash drop STACH-ID
+git stash clear
+
+# problem solving
+## reset FILE to index state
+git checkout FILE
+## change last commit message
+git commit --amend -m "message"
+## add file to last commit
+git add FILE
+git commit --amend -m "message"
+## move commits to another branch (changes history, e.g. when committing to wrong branch)
+### "cherrypicking"
+git log  # copy hash of commit
+git checkout CORRECT-BRANCH
+git cherry-pick COMMIT-HASH  # brings commit over to CORRECT-BRANCH
+git checkout WRONG-BRANCH
+git reset --hard COMMIT-HASH
+## restore changes deleted by reset `--hard`
+git reflog  # copy hash of commit 
+git checkout HASH  # detached HEAD state!
+git branch BACKUP-BRANCH
+## revert commit without changing history
+git revert COMMIT-HASH
+
+# difftool and mergetool allow external tools for seeing diffs and performing merges

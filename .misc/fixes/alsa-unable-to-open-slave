@@ -1,0 +1,7 @@
+# 08.01.2020
+# https://dev.to/setevoy/linux-alsa-lib-pcmdmixc1108sndpcmdmixopen-unable-to-open-slave-38on
+
+# add option to the snd_hda_intel sound card driver
+sudo nano /etc/modprobe.d/default.conf
+# add 'options snd_hda_intel index=1'
+# reboot (to reinitialize the kernel module)

@@ -1,0 +1,1 @@
+echo "options snd-hda-intel power_save=0 power_save_controller=N" | sudo tee /etc/modprobe.d/hda.conf >/dev/null

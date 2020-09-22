@@ -1,0 +1,3 @@
+# https://askubuntu.com/a/457332/889380
+sudo apt install tuxguitar-alsa tuxguitar-jsa tuxguitar-oss
+# Tools->Settings->Sound->Midi-Port->Gervill

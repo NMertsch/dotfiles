@@ -1,0 +1,31 @@
+#/bin/sh
+
+which jq || notify-send "missing dependency" "jq"
+
+# workspaces: name focused
+i3_workspaces=$(i3-msg -t get_workspaces | jq '.[] | .name + " " + (.focused|tostring)' | tr -d '"')
+
+# outputs: name active 
+i3_outputs=$(i3-msg -t get_outputs  | jq '.[] | .name + " " + .current_workspace + " " + (.active|tostring)' | tr -d '"' | grep true | cut -f1,2 -d " ")
+
+# find unused workspace
+for ws in 1 2 3 4 5 6 7 8 9; do
+    echo "$i3_workspaces" | cut -f1 -d " " | grep $ws > /dev/null || break
+done
+
+# find current workspace
+current_ws=$(echo "$i3_workspaces" | grep true | cut -f1 -d " ")
+
+# find inactive output
+output=$(echo "$i3_outputs" | head -n1 | cut -f1 -d " ")  # fallback: first output
+not_current_output=$(echo "$i3_outputs" | awk -v current_ws="$current_ws" '{if ($2 !~ current_ws) print $1;}' | head -n 1)
+test -z "$not_current_output" && not_current_output="$output" && echo default
+
+# move current window to $ws
+if [ "$1" = "--move" ]; then
+    i3-msg -q move workspace $ws
+fi
+
+# switch to $ws and mmove it to $not_current_output
+i3-msg -q workspace $ws
+i3-msg -q move workspace to output $not_current_output

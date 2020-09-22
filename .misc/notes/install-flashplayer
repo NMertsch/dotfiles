@@ -1,0 +1,8 @@
+# FIREFOX
+# download .tar.gz archive from https://get.adobe.com/flashplayer/
+cd ~/Downloads
+tar -xzf flash_player_npapi_linux*.tar.gz
+mkdir -p ~/.mozilla/plugins/
+cp libflashplayer.so ~/.mozilla/plugins/
+sudo cp -r usr/* /usr
+# restart firefox

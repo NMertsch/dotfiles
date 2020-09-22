@@ -1,0 +1,25 @@
+#!/bin/bash
+if [ "$1" = "" ]; then
+    >&2 echo "no key given"
+    exit 1
+fi
+
+target="$1"
+
+IFS=$'\n'  # set \n as only internal field separator, so for does not loop over words but lines
+matched_key=
+for line in $(xrdb -query | xargs -L1 echo); do
+    key=$(echo "$line" | cut -d":" -f1)
+    #echo $target $key
+    if [[ ! -z $(echo "$target" | grep -E "$key") ]]; then  # grep -E: extended patterns, *: all
+        matched_key="$key"
+    fi
+done
+if [ "$matched_key" = "" ]; then
+    >&2 echo "no value for key '$target'"
+    exit 2
+fi
+
+res=$(xrdb -query | grep -F "$matched_key:" | cut -f2)
+
+echo "$res"

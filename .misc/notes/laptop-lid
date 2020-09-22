@@ -1,0 +1,6 @@
+# https://bbs.archlinux.org/viewtopic.php?id=161719
+sudo nano /etc/systemd/logind.conf
+# change: HandleLidSwitch=ignore
+
+# care: this will kill the login session, so save everything beforehand
+sudo systemctl restart systemd-logind.service

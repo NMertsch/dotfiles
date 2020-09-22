@@ -1,0 +1,34 @@
+# from https://arachnoid.com/android/SSHelper/
+# tested: 04.05.2019, Ubuntu 19.04, Android 9.0
+
+# NOTE: only for use in local network
+
+# On Android
+# App-Store: install SSHelper (from Paul Lutus)
+# Open SSHelper, Configuration
+# Remember Server adress: [IP] and SSH server port number: [PORT]
+
+# Test
+# On Linux
+# In terminal
+ssh -p [PORT] testuser@[IP]
+# password: "admin"
+# you should now be logged in on the Android device
+# log out again:
+exit
+
+# Activate secure authentification
+# On Linux
+# In terminal
+ssh-keygen -t rsa -f ~/.ssh/id_rsa -N ''
+ssh-copy-id -i ~/.ssh/id_rsa.pub  -p [PORT] [IP]
+# password: admin
+
+# On Android
+# Open SSHelper, Configuration
+# Disable password logins
+
+# On Linux
+# In terminal
+ssh -p [PORT] testuser@[IP]
+# should not ask for password

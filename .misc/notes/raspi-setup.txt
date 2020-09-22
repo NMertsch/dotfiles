@@ -1,0 +1,18 @@
+RASPI-CONFIG (https://www.dennis-henss.de/2018/03/28/installation-und-konfiguration-raspbian-lite-auf-raspberry-pi-3/)
+Raspbian Lite installieren
+user: pi, passwort: raspberry (raspberrz)
+sudo raspi-config (raspißconfig)
+OK, SELECT, FINISH: Shift+Arrow-key
+Keyboardlayout: 105 keys (intl), german, german, altGr: standard, compose: no
+Change username
+Change wifi location
+Advanced options: expand filesystem (default in NOOBS)
+Interfacing options: enable SSH
+
+hostname -I # für IPv4 (erste vier Blöcke)
+
+sudo apt-get update
+sudo apt-get upgrade
+
+(von anderem Rechner:)
+ssh pi@[IPv4]

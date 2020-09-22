@@ -1,0 +1,50 @@
+! terminal colors
+#define	term_black	#000000
+#define	term_red	#aa0000
+#define	term_green	#00aa00
+#define	term_yellow	#aa5500
+#define	term_blue	#0000aa
+#define	term_magenta	#aa00aa
+#define	term_cyan	#00aaaa
+#define	term_white	#aaaaaa
+#define	term_bright_black	#555555
+#define	term_bright_red		#ff5555
+#define	term_bright_green	#55ff55
+#define	term_bright_yellow	#ffff55
+#define	term_bright_blue	#5555ff
+#define	term_bright_magenta	#ff55ff
+#define	term_bright_cyan	#55ffff
+#define	term_bright_white	#ffffff
+
+! gui colors (adwaita-dark)
+#define	gui_bg		#33393b
+#define	gui_bg_content	#232729
+#define	gui_inactive	#2d3234
+#define	gui_text	#eeeeec
+#define	gui_text_inactive		#8d9091
+#define	gui_text_content		#dfdfdf
+#define	gui_text_content_inactive	#898b8b
+#define	gui_highlight		#215d9c
+#define	gui_border		#2e3335
+#define	gui_border_content	#1b1f20
+
+
+! fallback terminal values
+*background:	term_black
+*foreground:	term_white
+*color0:	term_black
+*color1:	term_red
+*color2:	term_green
+*color3:	term_yellow
+*color4:	term_blue
+*color5:	term_magenta
+*color6:	term_cyan
+*color7:	term_white
+*color8:	term_bright_black
+*color9:	term_bright_red
+*color10:	term_bright_green
+*color11:	term_bright_yellow
+*color12:	term_bright_blue
+*color13:	term_bright_magenta
+*color14:	term_bright_cyan
+*color15:	term_bright_white

@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# expect owncloud WebDAV link as parameter
+if [ -z "$1" ]; then
+    echo "No owncloud WebDAV link provided."
+    exit 1
+fi
+OWNCLOUD_WEBDAV_URL=$1
+
+MOUNT_DIR="$HOME/owncloud"
+
+# following: https://doc.owncloud.com/server/10.0/user_manual/files/access_webdav.html#creating-webdav-mounts-on-the-linux-command-line
+# date: 19.10.2019
+
+# install WebDAV filesystem driver
+if [[ "$(apt list --installed 2>/dev/null | grep ^davfs2/)" = "" ]]; then
+    echo "Installing dependency 'davfs2'"
+    sudo apt install -y davfs2
+fi
+
+# add user to davfs2 group
+sudo usermod -aG davfs2 $USER
+# create mount point directory
+mkdir -p $MOUNT_DIR
+# set up davfs2 config directory
+DAVFS2_CONFIG_DIR=~/.davfs2
+mkdir -p $DAVFS2_CONFIG_DIR
+sudo cp /etc/davfs2/secrets $DAVFS2_CONFIG_DIR
+sudo chown $USER:$USER $DAVFS2_CONFIG_DIR/secrets
+chmod 600 $DAVFS2_CONFIG_DIR/secrets
+
+# ask user for credentials
+echo -n "Owncloud username: "
+read username
+# echo
+echo -n "Owncloud password: "
+read -s password
+echo
+
+# add credentials to davfs2 secrets
+echo "$OWNCLOUD_WEBDAV_URL/ $username $password" >> $DAVFS2_CONFIG_DIR/secrets
+
+# add mounting information
+echo "$OWNCLOUD_WEBDAV_URL/ $MOUNT_DIR davfs user,rw,noauto 0 0" | sudo tee --append /etc/fstab >/dev/null

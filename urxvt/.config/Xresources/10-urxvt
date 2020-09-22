@@ -1,0 +1,26 @@
+! restore normal terminal behavior
+URxvt.termName: xterm-256color
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
+! appearance
+URxvt.scrollBar: false
+URxvt.font: xft:Noto Mono:style=Regular:size=11:antialias=true
+URxvt.boldFont: xft:Noto Mono:style=Bold:size=11
+URxvt.italicFont: xft:Noto Mono:style=Italic:size=11
+URxvt.boldItalicFont: xft:Noto Mono:style=Bold Italic:size=11
+
+! extensions
+URxvt.perl-ext-common: default,resize-font
+! ! resize (ext: resize-font)
+URxvt.resize-font.step: 2
+URxvt.keysym.C-minus: resize-font:smaller
+URxvt.keysym.C-KP_Subtract: resize-font:smaller
+URxvt.keysym.C-plus: resize-font:bigger
+URxvt.keysym.C-KP_Add: resize-font:bigger
+URxvt.keysym.C-KP_0: resize-font:reset
+! ! copy/paste (ext: default)
+URxvt.keysym.Control-Meta-c: builtin-string:
+URxvt.keysym.Control-Meta-v: builtin-string:
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard

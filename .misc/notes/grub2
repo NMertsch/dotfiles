@@ -1,0 +1,5 @@
+# boot windows on next boot
+## https://unix.stackexchange.com/a/112284/361553
+WINDOWS_TITLE=`grep -i 'windows' /boot/grub/grub.cfg | cut -d "'" -f2`
+sudo grub-reboot "$WINDOWS_TITLE"
+sudo reboot

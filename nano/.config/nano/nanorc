@@ -1,0 +1,4 @@
+set softwrap
+set tabstospaces
+set tabsize 4
+set smarthome

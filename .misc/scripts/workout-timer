@@ -1,0 +1,123 @@
+#!/usr/bin/python3
+# timer implementation follows https://www.w3schools.com/howto/howto_js_countdown.asp (2020-05-18)
+
+import os
+import tempfile
+import sys
+
+def read_workout_plan(fname):
+    plan = []
+    for line in open(fname).readlines():
+        exercise, time = line.split()
+        plan.append([exercise, int(time)])
+    return plan
+
+
+WORKOUT_PLAN = read_workout_plan(sys.argv[1])
+
+site = """
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Timer</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            .center {
+                text-align: center;
+                font-size: 15px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="center">
+            <p id="exercise" style="font-size: 100px"></p>
+            <p id="exercise-timer" style="font-size: 100px"></p>
+            <p id="next-exercise" style="font-size: 65px"></p>
+            <p id="workout-timer" style="font-size: 65px"></p>
+
+            <p id="debug1"></p>
+            <p id="debug2"></p>
+            <p id="debug3"></p>
+        </div>
+
+        <script>
+
+function main () {
+    let workoutPlan = WORKOUT_PLAN;
+
+    function run_next_timer(exercise_index) {
+        // exit condition
+        if (exercise_index >= workoutPlan.length) {
+            document.getElementById("exercise").innerHTML = "DONE";
+            document.getElementById("next-exercise").innerHTML = "";
+            document.getElementById("exercise-timer").innerHTML = "";
+            document.getElementById("workout-timer").innerHTML = "";
+            return;
+        }
+
+        // time for all remaining exercises
+        var total_seconds_left = 0;
+        for (var i = exercise_index; i < workoutPlan.length; i++) {
+            total_seconds_left += workoutPlan[i][1];
+        }
+
+        // current exercise
+        seconds = workoutPlan[exercise_index][1];
+        exercise = workoutPlan[exercise_index][0] + " (" + seconds + " s)";
+
+        // next exercise
+        if (exercise_index < workoutPlan.length - 1) {
+            next_seconds = workoutPlan[exercise_index+1][1];
+            next_exercise = workoutPlan[exercise_index+1][0] + " (" + next_seconds + " s)";
+        } else {
+            next_exercise = "END"
+        }
+
+    function set_timers(exercise_time_left, workout_time_left) {
+        let workoutMinutes = Math.floor(workout_time_left / 60);
+        let workoutSeconds = Math.ceil(workout_time_left % 60);
+        document.getElementById("workout-timer").innerHTML = "Workout: " + workoutMinutes + " m " + workoutSeconds + " s";
+
+        let exerciseSeconds = Math.ceil(exercise_time_left);
+        document.getElementById("exercise-timer").innerHTML = exerciseSeconds + " s";
+    }
+
+    function process_exercise(exercise, next_exercise, seconds, total_seconds_left, exercise_number) {
+        var start_time = Date.now() / 1000;
+
+        document.getElementById("exercise").innerHTML = exercise + "<br>";
+        document.getElementById("next-exercise").innerHTML = "Next: " + next_exercise + "<br>";
+
+        var intervalId = setInterval(function() {
+            var current_time = Date.now() / 1000;
+            var exercise_time_left = start_time + seconds - current_time;
+            var workout_time_left = start_time + total_seconds_left - current_time;
+            set_timers(exercise_time_left, workout_time_left);
+
+            if (exercise_time_left <= 0) {
+                clearInterval(intervalId);
+                exercise_number++;
+                run_next_timer(exercise_number);
+            }
+
+        }, 50);
+    }
+
+        // run timer
+        process_exercise(exercise, next_exercise, seconds, total_seconds_left, exercise_index);
+    }
+
+    run_next_timer(0)
+}
+
+main()
+        </script>
+
+    </body>
+</html>
+
+""".replace("WORKOUT_PLAN", str(WORKOUT_PLAN))
+
+tmp_file = tempfile.mktemp()
+open(tmp_file, "w").write(site)
+os.system(f"xdg-open {tmp_file}")

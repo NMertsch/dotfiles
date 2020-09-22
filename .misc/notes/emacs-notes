@@ -1,0 +1,31 @@
+# general
+C-x is special: prefix for different things
+C-x C-s save
+C-x C-c exit
+C-g abort running/started command
+C-h k [command] show help
+
+# moving
+C-v next screen/page
+M-v prev screen/page
+C-l move screen around cursor
+C-p up (previous)
+C-b left (backwards)
+C-n down (next)
+C-f right (forward)
+M-b word left (backwards)
+M-f word right (forward)
+C-a line beginning
+C-e line ending
+M-a sentence beginning
+M-e sentence ending
+M-< document beginning
+M-> document ending
+
+# numbers: prefix arguments
+- C-3p down (next) for 3 lines up
+- or C-u 3 C-p, C-u stores the number
+- some commands use arguments as flags
+
+# windows (in emacs)
+- C-x 1 kills all other windows

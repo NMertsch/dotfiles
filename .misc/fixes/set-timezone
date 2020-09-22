@@ -1,0 +1,13 @@
+# list available timezones
+timedatectl list-timezones
+## search timezone (e.g. berlin)
+timedatectl list-timezones | grep -i berlin
+## list zones
+timedatectl list-timezones | cut -f1 -d/ | uniq
+## list subzones in zone (e.g. Europe)
+timedatectl list-timezones | grep ^Europe
+
+# set timezone
+timedatectl set-timezone Zone/Subzone
+## example: 
+timedatectl set-timezone Europe/Berlin

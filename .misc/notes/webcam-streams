@@ -1,0 +1,17 @@
+# video devices are at /dev/video*
+
+# activate loopback of videos to virtual video devices
+sudo apt install v4l2loopback-dkms
+sudo modprobe v4l2loopback
+
+# stream desktop as webcam (here: /dev/video4)
+ffmpeg \
+    -f x11grab \  # -f - force format; x11grab - X11 display grabbing
+    -r 15 \  # -r FRAMERATE
+    -s 1280x720 \   # -s FRAMESIZE
+    -i :0.0+0,0 \  # -i - input; :0.0 - display.screen; +0,0 - +xoffset,yoffset
+    -vcodec rawvideo \  # output video codec
+    -pix_fmt yuv420p \  # pixel format (color encoding?)
+    -threads 0 \  # 0 - use "optimal" number of threads
+    -f v4l2 \  # 
+    /dev/video4  # output device file

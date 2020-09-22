@@ -1,0 +1,20 @@
+# command line options
+-lualatex   run lualatex instead of pdflatex
+-pdf    generate pdf
+-c  clean reproducable files, but not generated documents
+-C  clean all reproducable files, even generated documents
+-pv try to run preview (xpdf by default)
+-bm banner message (printed across pages)
+-f  force continuation on error
+-g  force rerun of latexmk even if no changes are detected (e.g. on settings changes)
+-gg clean before run (clean like -C)
+-l  landscape mode
+-logfilewarninglist after the last run, print all warnings about undefined references and citations
+-outdir=... write all files in given directory
+-r uses given rc-file (PERL variable definitions, default: .latexmk in $HOME, overridden by .latexmk in same directory)
+-time   show passed CPU time
+
+# rcfile options
+$pdf_previewer = 'atril %S'
+$bibtex_use = 2  # mark .bbl files as reproducable
+$clean_ext, $clean_full_ext: specify more reproducable files, see documentation

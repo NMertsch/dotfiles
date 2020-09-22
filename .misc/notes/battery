@@ -1,0 +1,7 @@
+https://wiki.archlinux.org/index.php/Laptop_Mode_Tools
+for laptop mode configuration
+
+acpid is daemon to detect events like plug/unplug or lid-close of laptops
+
+https://wiki.archlinux.org/index.php/CPU_frequency_scaling
+for energy saving modes etc.

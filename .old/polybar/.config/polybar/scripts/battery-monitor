@@ -1,0 +1,72 @@
+#!/bin/bash
+
+# stderr redirection is not clean. But it makes it easy to check if no battery is found.
+battery_info=$(acpi -b 2>&1 | grep -v unavailable)
+
+# exit if no battery found
+[ -z "$battery_info" ] && echo "" && exit 0
+if [ "$(echo $battery_info | grep 'No support for device type: power_supply')" ]; then
+    echo ""
+    exit 0
+fi
+
+battery_percentage=$(echo "$battery_info" | cut -d ' ' -f 4 | grep -o '[0-9]*')
+battery_state=$(echo "$battery_info" | cut -d ' ' -f 3 | sed 's/,//g')
+plug=""
+full=""
+threequarter=""
+half=""
+quarter=""
+empty=""
+color="polybar.text"
+if [ ! "$battery_state" = "Discharging" ]; then
+    icon="$plug"
+    text=""
+else
+    if [ "$battery_percentage" -ge 80 ]; then
+        icon="$full"
+    elif [ "$battery_percentage" -le 80 ]; then
+        icon="$threequarter"
+    elif [ "$battery_percentage" -le 60 ]; then
+        icon="$half"
+    elif [ "$battery_percentage" -le 40 ]; then
+        icon="$quarter"
+        color="polybar.alert"
+    elif [ "$battery_percentage" -le 20 ]; then
+        icon="$empty"
+        color="polybar.alert"
+    fi
+    text=" $battery_percentage %"
+fi
+
+icon_string="%{T4}$icon%{T1}"
+echo "%{F$(xrdb-get $color)}$icon_string$text%{F-}"
+
+if [ ! -f /tmp/.battery ]; then
+    echo "$battery_percentage" > /tmp/.battery
+    echo "$battery_state" >> /tmp/.battery
+    continue
+fi
+
+previous_battery_percentage=$(cat /tmp/.battery | head -n1)
+previous_battery_state=$(cat /tmp/.battery | tail -n1)
+echo "$battery_percentage" > /tmp/.battery
+echo "$battery_state" >> /tmp/.battery
+
+# check for state change
+if [ "$previous_battery_state" == "Discharging" ] && [ "$battery_state" != "Discharging" ]; then
+    notify-send "Charging" "Power cable is now plugged in." -u low -t 3000
+elif [ "$previous_battery_state" != "Discharging" ] && [ "$battery_state" == "Discharging" ]; then
+    notify-send "Power Unplugged" "Power cable is now unplugged" -u low -t 3000
+fi
+
+# react to percentage
+if [ "$battery_state" != "Discharging" ] || [ "${battery_percentage}" == "${previous_battery_percentage}" ]; then
+    continue
+elif [ "$battery_percentage" -eq 5 ]; then
+    systemctl suspend
+elif [ "$battery_percentage" -eq 15 ]; then
+    notify-send "Low Battery: ${battery_percentage}%" "Will suspend soon" -u critical
+elif [ "$battery_percentage" -eq 35 ]; then
+    notify-send "Low Battery: ${battery_percentage}%" -u normal
+fi

@@ -1,0 +1,42 @@
+# Apt: The Advanced Packaging Tool
+# The `apt` command is a unified interface for accessing the most popular apt-commands like `apt-get` or `apt-cache`
+
+# install from from .deb file
+# NOTE: if dependencies are missing, this will install them from the repositories
+sudo apt install package.deb
+
+# install from repositories
+sudo apt install package
+
+# remove package
+sudo apt remove package
+
+# check for available updates
+sudo apt update
+
+# install available updates
+# NOTE: does not check for updates, so run `sudo apt update` first
+sudo apt upgrade
+
+# remove packages that are not needed anymore
+sudo apt autoremove
+
+# list available packages
+apt list
+
+# list installed packages
+apt list --installed
+
+# show package information
+apt show package
+
+# search for package
+# NOTE: lists every package that includes the search term in its description, can be a lot
+apt search search-term
+
+# edit repositories
+sudo apt edit-sources
+
+# Unattended-Upgrades: Automatic system updates
+# Can be installed via `sudo apt install unattended-upgrades`
+# Configuration and setup: see e.g. in the Ubuntu Server Documentation

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+battery_percentage=$(acpi | tail -n 1 | grep -oP "\d+%" | -d "%")
+if [[ "$battery_percentage" -le "25" ]]; then
+    if [[ -n "$(acpi | grep Discharging)" ]]; then
+        xbacklight -set 20
+        notify-send "Battery" "Low percentage: $battery_percentage %"
+        exit
+    fi
+fi
+
+xbacklight -set 100

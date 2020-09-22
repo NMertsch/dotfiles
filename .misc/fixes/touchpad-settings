@@ -1,0 +1,13 @@
+# https://wiki.debian.org/LibinputTouchpad
+
+# configure the touchpad
+# > sudo nano /usr/share/X11/xorg.conf.d/40-libinput.conf
+# go to section with 'MatchIsTouchpad "on"'
+# add those lines:
+         Option "NaturalScrolling" "on"
+         Option "Tapping" "on"
+         Option "TappingButtonMap" "lrm"
+         Option "TappingDrag" "on"
+         Option "TappingDragLock" "on"
+
+# restart X server (e.g. reboot)

@@ -1,0 +1,8 @@
+# example usecase: default uses HDMI output, which has no speakers
+# use 'pavucontrol' to determine wanted behaviour (gets reset on inactivity)
+# determine name and profile from 'pacmd list-cards'
+# test it with 'pactl set-card-profile <symbolic-name> <profilename>'
+
+# example: 'pactl set-card-profile alsa_card.pci-0000_00_03.0 off'
+
+# this does not prevent the profile to be reactivated e.g. when headphones are unplugged

@@ -1,0 +1,3 @@
+# https://serverfault.com/a/24431
+# Run command followed by "&"
+disown -h $1

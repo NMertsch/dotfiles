@@ -1,0 +1,12 @@
+#/bin/bash
+
+# https://unix.stackexchange.com/a/385116
+# https://wiki.archlinux.org/index.php/Backlight#xbacklight
+
+if [[ "$(ls /sys/class/xbacklight)" = "intel_backlight" ]]; then
+    sudo cp 20-intel-xbacklight.conf /usr/share/X11/xorg.conf.d/
+    exit 1
+else
+    echo "Sorry, this machine does not use intel_backlight."
+    exit 1
+fi

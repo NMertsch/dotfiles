@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ "$1" = "" ]; then
+    echo -n "Username: "
+    read username
+else
+    username="$1"
+fi
+
+ssh_cmd="ssh $username"@shell.stud.informatik.uni-goettingen.de
+echo "$ssh_cmd"
+$ssh_cmd
+

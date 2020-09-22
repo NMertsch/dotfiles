@@ -1,0 +1,10 @@
+# find recommended proprietary driver and install it
+# install ubuntu drivers program
+## > sudo apt install ubuntu-drivers-common
+
+# list devices and their drivers:
+## > ubuntu-drivers devices
+## this should list at least one driver and exactly one "recommended" driver. In my case, recommended is "nvidia-driver-435"
+
+# install that driver
+## > sudo apt install nvidia-driver-435

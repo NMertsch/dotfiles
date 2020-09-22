@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Rxvt Color Unicode Terminal
+Comment=Use the command line
+TryExec=urxvt-client
+Exec=urxvt-client
+Icon=xterm-color
+Type=Application
+Categories=Utility;TerminalEmulator;
+StartupNotify=true
+Keywords=Run;
+StartupWMClass=URxvt

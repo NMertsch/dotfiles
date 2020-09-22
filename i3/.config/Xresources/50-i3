@@ -1,0 +1,8 @@
+i3.background: gui_bg_inactive
+i3.background_alt: gui_bg
+i3.highlight: gui_highlight
+i3.urgent: term_red
+i3.text: gui_text
+i3.text_inactive: gui_text_content_inactive
+i3.border: gui_border
+i3.border_alt: gui_text_inactive

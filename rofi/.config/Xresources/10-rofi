@@ -1,0 +1,22 @@
+! behavior
+rofi.fixed-num-lines: false
+rofi.lines: 10
+rofi.width: 750
+rofi.columns: 1
+rofi.monitor: -1
+rofi.show-icons: true
+rofi.bw: 2
+rofi.location: 0
+rofi.line-margin: 2
+rofi.padding: 3
+rofi.separator-style: solid
+rofi.hide-scrollbar: false
+rofi.markup-rows: false
+
+! theme
+!			bg              fg			bg-alt			bg-hl		fg-hl
+rofi.color-normal:	gui_bg_content,	gui_text_content,	gui_bg_inactive,	gui_highlight,	gui_text
+rofi.color-active:	gui_bg_content,	gui_text_content,	gui_bg_inactive,	gui_highlight,	gui_text
+rofi.color-urgent:	gui_bg_content,	gui_text_content,	gui_bg_inactive,	gui_highlight,	gui_text
+!			bg		border			separator
+rofi.color-window:	gui_bg_content,	gui_highlight,		gui_highlight

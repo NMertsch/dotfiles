@@ -1,0 +1,17 @@
+#run VMs
+#https://askubuntu.com/a/768310/889380
+openssl req -new -x509 -newkey rsa:2048 -keyout MOK.priv -outform DER -out MOK.der -nodes -days 36500 -subj "/CN=Descriptive common name/"
+sudo /usr/src/linux-headers-$(uname -r)/scripts/sign-file sha256 ./MOK.priv ./MOK.der $(modinfo -n vboxdrv)
+tail $(modinfo -n vboxdrv) | grep "Module signature appended"
+sudo mokutil --import MOK.der
+reboot, enroll MOK (machine Owner Key), reboot
+mokutil --test-key MOK.der
+
+#have shared folders
+#host:
+mkdir ~/vm_share
+#guest:
+sudo apt install virtualbox-guest-utils
+sudo mkdir /mnt/vm_share
+sudo chmod 777 /mnt/vm_share
+sudo mount -t vboxsf -o uid=1000,gid=1000, vm_share /mnt/vm_share
