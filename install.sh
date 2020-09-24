@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# fail on error, print commands
+set -e
+set -x
+
 # prerequisites
 ## fresh ubuntu server installation
 # - tested with groovy gorilla (20.10)
@@ -9,10 +13,11 @@
 # - sudo apt install -y git
 
 ## (optional) set up wireless networking
-# - sudo apt install iwd dhcpcd5
+# - sudo apt install -y iwd dhcpcd5
 # - iwctl  # (interactive command)
 #   - station [WIRELESS] connect [ESSID]  # (e.g. station wlan0 connect MyWiFi)
 #   - [PASSPHRASE]
+#   - exit
 # - sudo systemctl enable dhcpcd.service
 # - sudo systemctl start dhcpcd.service
 
@@ -68,7 +73,6 @@ stow rofi -t ~
 stow urxvt -t ~
 stow utils -t ~
 stow X11 -t ~
-
 
 # install necessary packages
 sudo apt install -y i3 pulseaudio
