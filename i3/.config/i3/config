@@ -10,45 +10,29 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-# Macros
-set $run_menu "rofi -show drun -display-drun 'Run'"
-set $window_switcher "rofi -show window -display-window 'Window'"
-set $exit ~/.config/i3/scripts/exit.sh
-set $mount ~/.config/i3/scripts/mount.sh
-set $unmount ~/.config/i3/scripts/unmount.sh
-set $screenshot ~/.config/i3/scripts/screenshot.sh
-set $showVolume ~/.config/i3/scripts/showVolume.sh
-set $exec_no_urgency ~/.config/i3/scripts/exec_no_urgency.sh
-set $displayselect displayselect
-set $dropdown "urxvt-client -title dropdown"
-set $math urxvt-client -title "math dropdown" -e bash -c '~/miniconda3/envs/math/bin/python -i ~/.config/i3/scripts/math-dropdown.py'
-set $move_to_new_ws ~/.config/i3/scripts/i3-move-to-new-workspace
-
-# Basics keybinds
+# keybindings
 set $mod Mod4
 floating_modifier $mod
-bindsym $mod+Return exec x-terminal-emulator
+bindsym $mod+Return exec urxvt-client
 bindsym $mod+Shift+q kill
-bindsym $mod+F4 kill
 bindsym Mod1+F4 kill
-bindsym --release button2 kill
-bindsym $mod+d exec $run_menu
-bindsym $mod+Tab exec $window_switcher
-bindsym XF86PowerOff nop
+bindsym $mod+d exec rofi -show drun -display-drun 'Run'
 bindsym $mod+Shift+r restart
-bindsym $mod+Shift+e exec $exit
-bindsym Print exec "$screenshot -s"
-bindsym Shift+Print exec $screenshot
+bindsym $mod+Shift+e exec dmenu-exit
+bindsym Print exec screenshot -s
+bindsym Shift+Print exec screenshot
 bindsym $mod+n exec $mount
 bindsym $mod+Shift+n exec $unmount
-bindsym $mod+Shift+Ctrl+r exec $displayselect
+bindsym $mod+Shift+Ctrl+r exec displayselect
+bindsym $mod+z exec i3-move-to-new-workspace
+bindsym $mod+Shift+z exec i3-move-to-new-workspace --move
+bindsym $mod+c split v; focus right; move left
 
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-# alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
@@ -59,15 +43,10 @@ bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
-# alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
-
-# move focused window to new workspace on different output
-bindsym $mod+z exec $move_to_new_ws
-bindsym $mod+Shift+z exec $move_to_new_ws --move
 
 # move active workspace
 bindsym $mod+Shift+Ctrl+Left move workspace to output left
@@ -90,7 +69,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle; move position center
 bindsym $mod+space focus mode_toggle
 
-# focus the parent container
+# focus parent/child container
 bindsym $mod+a focus parent
 bindsym $mod+Shift+a focus child
 
@@ -132,34 +111,28 @@ bindsym $mod+Ctrl+l resize shrink width 10 px or 5 ppt
 font pango:Noto Sans Bold 9
 hide_edge_borders smart
 default_floating_border normal
-title_align center
-default_border pixel 2
+default_border pixel 3
 ## force some gnome apps to have the same border...
-for_window [class=".*"] border pixel 2
+for_window [class=".*"] border pixel 3
 
 # Behaviour
 focus_follows_mouse no
 mouse_warping none
-popup_during_fullscreen smart
 force_display_urgency_hint 500 ms
 no_focus [window_role="pop-up"]
 workspace_auto_back_and_forth yes
 
 # Media keys
-bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 2%+ && $showVolume -i audio-volume-high
-bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 2%- && $showVolume -i audio-volume-low
-bindsym XF86AudioMute exec --no-startup-id amixer -D pulse sset Master toggle && $showVolume -i audio-volume-muted
-# https://askubuntu.com/a/1114872 for enabling xbacklight
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
-
-# Workspace assignments
-assign [class="thunderbird"] $ws4
-for_window [class="thunderbird"] layout tabbed
-assign [class="Thunderbird"] $ws4
-for_window [class="Thunderbird"] layout tabbed
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86MonBrightnessUp exec --no-startup-id notify-send "Backlight" "not configured in ~/.config/i3/config"
+bindsym XF86MonBrightnessDown exec --no-startup-id notify-send "Backlight" "not configured in ~/.config/i3/config"
 
 # Floating
+for_window [class="i3-float"] floating enable
 for_window [class="Nitrogen"] floating enable
 for_window [class="System-config-printer"] floating enable
 for_window [class="Gpick"] floating enable
@@ -190,8 +163,8 @@ for_window [class=" " instance=" " title="^Figure"] floating enable
 for_window [title="^win0$"] floating enable
 
 # Colors
-set_from_resource $bg i3.background
-set_from_resource $bg_alt i3.background_alt
+set_from_resource $bg i3.bg
+set_from_resource $bg_alt i3.bg_alt
 set_from_resource $highlight i3.highlight
 set_from_resource $text i3.text
 set_from_resource $text_inactive i3.text_inactive
@@ -206,36 +179,31 @@ client.urgent           $urgent     $urgent    $text          $urgent    $border
 client.placeholder      $bg         $bg        $text          $bg        $border
 client.background       $bg
 
-# layout scripts
-bindsym $mod+c exec ~/.config/i3/scripts/columns.sh
-
 # scratchpad tools
-## python for math and stuff
-## Mod+m        show/hide
-## Mod+Shift+m  open (is opened once after login)
-## NOTE: xterm -e [cmd] sets the title to [cmd]
-exec --no-startup-id $math
-bindsym $mod+m [title="math dropdown"] scratchpad show; [title="math dropdown"] move position center
-bindsym $mod+Shift+m exec $math
-for_window [title="math dropdown"] floating enable
-for_window [title="math dropdown"] resize set 625 400
-for_window [title="math dropdown"] move scratchpad
-for_window [title="math dropdown"] border pixel 5
+## dropdown python
+set $dropdown_python urxvt-client -title "dropdown python" -e bash -c "python -ic 'import os, sys, numpy as np, matplotlib.pyplot as plt, scipy.stats'"
+bindsym $mod+m [title="dropdown python"] scratchpad show; [title="dropdown python"] move position center
+bindsym $mod+Shift+m exec $dropdown_python
+for_window [title="dropdown python"] floating enable
+for_window [title="dropdown python"] resize set 625 400
+for_window [title="dropdown python"] move scratchpad
+for_window [title="dropdown python"] border pixel 5
 
-## simple xterm
-## Mod+p        show/hide
-## Mod+Shift+p  open (is opened once after login)
-exec --no-startup-id $dropdown
-bindsym $mod+p [title="^dropdown$"] scratchpad show; [title="^dropdown$"] move position center
-bindsym $mod+Shift+p exec $dropdown
-for_window [title="^dropdown$"] floating enable
-for_window [title="^dropdown$"] resize set 625 400
-for_window [title="^dropdown$"] move scratchpad
-for_window [title="^dropdown$"] border pixel 5
+## dropdown terminal
+set $dropdown_terminal urxvt-client -title "dropdown terminal"
+bindsym $mod+p [title="dropdown terminal"] scratchpad show; [title="dropdown terminal"] move position center
+bindsym $mod+Shift+p exec $dropdown_terminal
+for_window [title="dropdown terminal"] floating enable
+for_window [title="dropdown terminal"] resize set 625 400
+for_window [title="dropdown terminal"] move scratchpad
+for_window [title="dropdown terminal"] border pixel 5
+
+# i3bar
+bar {
+    status_command i3status
+}
 
 # autostart
-exec --no-startup-id ~/bin/polybar-launch
-exec --no-startup-id $exec_no_urgency thunderbird
-exec --no-startup-id numlockx on
-exec --no-startup-id dunst
-exec --no-startup-id $displayselect --auto
+exec --no-startup-id $dropdown_python
+exec --no-startup-id $dropdown_terminal
+

@@ -1,7 +1,7 @@
 # set display resolution
 case `hostname` in
     niklas-desktop)
-        xrandr --output DP-1 --panning 1920x1080+0+0 --output HDMI-0 --panning 2560x1440+1920+0 &
+        xrandr --output DP-1 --panning 1920x1080+0+0 --output HDMI-0 --primary --panning 2560x1440+1920+0 &
     ;;
 esac
 

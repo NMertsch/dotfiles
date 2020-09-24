@@ -1,5 +1,5 @@
-i3.background: gui_bg_inactive
-i3.background_alt: gui_bg
+i3.bg: gui_bg_inactive
+i3.bg_alt: gui_bg
 i3.highlight: gui_highlight
 i3.urgent: term_red
 i3.text: gui_text
