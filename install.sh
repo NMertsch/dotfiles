@@ -9,7 +9,7 @@ set -x
 # - tested with groovy gorilla (20.10)
 
 ## install git
-# - sudo apt update -y
+# - sudo apt update
 # - sudo apt install -y git
 
 ## clone this repo
@@ -20,7 +20,7 @@ set -x
 # remove server-specific packages (-> ubuntu minimal)
 sudo apt update -y
 sudo snap remove --purge lxd
-sudo apt remove -y --auto-remove --purge clout-init snapd ubuntu-server
+sudo apt remove -y --auto-remove --purge cloud-init snapd ubuntu-server
 
 # upgrade installed packages
 sudo apt full-upgrade -y
