@@ -12,15 +12,6 @@ set -x
 # - sudo apt update -y
 # - sudo apt install -y git
 
-## (optional) set up wireless networking
-# - sudo apt install -y iwd dhcpcd5
-# - iwctl  # (interactive command)
-#   - station [WIRELESS] connect [ESSID]  # (e.g. station wlan0 connect MyWiFi)
-#   - [PASSPHRASE]
-#   - exit
-# - sudo systemctl enable dhcpcd.service
-# - sudo systemctl start dhcpcd.service
-
 ## clone this repo
 # - mkdir ~/Projects
 # - cd ~/Projects
