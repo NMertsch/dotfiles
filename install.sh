@@ -16,6 +16,7 @@ set -x
 # - mkdir ~/Projects
 # - cd ~/Projects
 # - git clone [this repo's url]
+# - cd dotfiles
 
 # remove server-specific packages (-> ubuntu minimal)
 sudo apt update -y
@@ -23,7 +24,7 @@ sudo snap remove --purge lxd
 sudo apt remove -y --auto-remove --purge cloud-init snapd ubuntu-server
 
 # upgrade installed packages
-sudo apt full-upgrade -y
+sudo apt -o Dpkg::Options::="--force-confdef" -p Dpkg::Options::="--force-confnew" full-upgrade -y
 sudo apt autoremove -y
 
 # set up some directories
@@ -68,7 +69,7 @@ stow X11 -t ~
 # install necessary packages
 sudo apt install -y i3 pulseaudio
 sudo apt install -y xinit x11-xserver-utils
-sudo apt install -y bash-completion man-db grep wget curl sed vim tree emacs acpi htop libnotify-bin numlockx pulseaudio pavucontrol pulseaudio-module-bluetooth bluez dunst rofi xclip scrot feh python3-notify2 arandr mpv youtube-dl wmctrl jq x11-utils nfts-3g rxvt-unicode atril pandoc firefox thunar thunderbird cups libreoffice
+sudo apt install -y bash-completion man-db grep wget curl sed vim tree emacs acpi htop libnotify-bin numlockx pulseaudio pavucontrol pulseaudio-module-bluetooth bluez dunst rofi xclip scrot feh python3-notify2 arandr mpv youtube-dl wmctrl jq x11-utils ntfs-3g rxvt-unicode atril pandoc firefox thunar
 
 # install python
 ## download and miniconda3 installation
@@ -81,4 +82,3 @@ rm $MINICONDA_FILE
 ## set up the installation
 $HOME/.local/etc/miniconda3/bin/conda init
 $HOME/.local/etc/miniconda3/bin/conda install -y python numpy matplotlib scikit-learn scipy numba jupyter seaborn beautifulsoup4
-
