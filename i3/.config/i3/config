@@ -133,6 +133,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id notify-send "Backlight" "not 
 
 # Floating
 for_window [class="i3-float"] floating enable
+for_window [title="i3-float"] floating enable
 for_window [class="Nitrogen"] floating enable
 for_window [class="System-config-printer"] floating enable
 for_window [class="Gpick"] floating enable
