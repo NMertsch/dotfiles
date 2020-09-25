@@ -8,10 +8,6 @@ set -x
 ## fresh ubuntu server installation
 # - tested with groovy gorilla (20.10)
 
-## install git
-# - sudo apt update
-# - sudo apt install -y git
-
 ## clone this repo
 # - mkdir ~/Projects
 # - cd ~/Projects
@@ -21,10 +17,11 @@ set -x
 # remove server-specific packages (-> ubuntu minimal)
 sudo apt update -y
 sudo snap remove --purge lxd
-sudo apt remove -y --auto-remove --purge cloud-init snapd ubuntu-server
+tmp=`mktemp`
+sudo apt remove -y --auto-remove --purge cloud-init snapd ubuntu-server | tee $tmp
 
-# upgrade installed packages
-sudo apt -o Dpkg::Options::="--force-confdef" -p Dpkg::Options::="--force-confnew" full-upgrade -y
+# upgrade installed packages (replace configuration, if possible)
+sudo apt -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confnew" full-upgrade -y
 sudo apt autoremove -y
 
 # set up some directories
