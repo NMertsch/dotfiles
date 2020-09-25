@@ -67,7 +67,7 @@ stow X11 -t ~
 # install necessary packages
 sudo apt install -y i3 pulseaudio
 sudo apt install -y xinit x11-xserver-utils
-sudo apt install -y bash-completion man-db grep wget curl sed vim tree emacs acpi htop libnotify-bin numlockx pulseaudio pavucontrol pulseaudio-module-bluetooth bluez dunst rofi xclip scrot feh python3-notify2 arandr mpv youtube-dl wmctrl jq x11-utils ntfs-3g rxvt-unicode atril pandoc firefox thunar
+sudo apt install -y bash-completion man-db grep wget curl sed vim tree emacs acpi htop libnotify-bin numlockx pulseaudio pavucontrol pulseaudio-module-bluetooth bluez dunst rofi xclip scrot feh python3-notify2 arandr mpv youtube-dl wmctrl jq x11-utils ntfs-3g rxvt-unicode atril pandoc firefox thunar file-roller
 
 # install python
 ## download and miniconda3 installation
