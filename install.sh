@@ -16,6 +16,7 @@ set -x
 
 # remove server-specific packages (-> ubuntu minimal)
 sudo apt update -y
+sudo apt install git
 sudo snap remove --purge lxd
 tmp=`mktemp`
 sudo apt remove -y --auto-remove --purge cloud-init snapd ubuntu-server | tee $tmp
