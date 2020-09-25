@@ -21,8 +21,8 @@ sudo snap remove --purge lxd
 tmp=`mktemp`
 sudo apt remove -y --auto-remove --purge cloud-init snapd ubuntu-server | tee $tmp
 
-# upgrade installed packages (replace configuration, if possible)
-sudo apt -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confnew" full-upgrade -y
+# upgrade installed packages
+sudo DEBIAN_FRONTEND=noninteractive apt full-upgrade -y
 sudo apt autoremove -y
 
 # set up some directories
