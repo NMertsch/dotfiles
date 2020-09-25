@@ -19,7 +19,7 @@
 ! gui colors (adwaita-dark)
 #define	gui_bg		#33393b
 #define	gui_bg_content	#232729
-#define	gui_inactive	#2d3234
+#define	gui_bg_inactive	#2d3234
 #define	gui_text	#eeeeec
 #define	gui_text_inactive		#8d9091
 #define	gui_text_content		#dfdfdf

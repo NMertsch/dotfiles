@@ -7,9 +7,9 @@ esac
 
 # merge all Xresources into xrdb
 if [ -d ~/.config/Xresources ]; then
-    for file in ~/.config/Xresources/*; do
-        xrdb -merge $file
-    done
+    tmp=`mktemp`
+    cat ~/.config/Xresources/* > $tmp
+    xrdb -merge $tmp
 fi
 
 # enable numpad
