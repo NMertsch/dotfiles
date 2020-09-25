@@ -26,13 +26,13 @@ sudo DEBIAN_FRONTEND=noninteractive apt full-upgrade -y
 sudo apt autoremove -y
 
 # set up some directories
-## home directories and shortcuts
-mkdir ~/Documents && ln -s $HOME/Documents $HOME/doc
-mkdir ~/Pictures && ln -s $HOME/Pictures $HOME/pic
-mkdir ~/Downloads && ln -s $HOME/Downloads $HOME/dl
-mkdir ~/Videos && ln -s $HOME/Videos $HOME/vid
-mkdir ~/Projects && ln -s $HOME/Projects $HOME/git
-mkdir ~/Desktop
+## home directories and shortcuts (-p to resume when they already exist)
+mkdir -p ~/Documents && ln -s $HOME/Documents $HOME/doc
+mkdir -p ~/Pictures && ln -s $HOME/Pictures $HOME/pic
+mkdir -p ~/Downloads && ln -s $HOME/Downloads $HOME/dl
+mkdir -p ~/Videos && ln -s $HOME/Videos $HOME/vid
+mkdir -p ~/Projects && ln -s $HOME/Projects $HOME/git
+mkdir -p  ~/Desktop
 
 ## mounts points for usb devices
 sudo mkdir -p /mnt/external1 /mnt/external2 /mnt/usb1 /mnt/usb2
