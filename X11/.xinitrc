@@ -1,7 +1,10 @@
-# set display resolution
+# machine-dependent settings
 case `hostname` in
     niklas-desktop)
         xrandr --output DP-1 --panning 1920x1080+0+0 --output HDMI-0 --primary --panning 2560x1440+1920+0 &
+    ;;
+    niklas-tp)
+        which brightnessctl >/dev/null && brightnessctl s 30% >/dev/null
     ;;
 esac
 
