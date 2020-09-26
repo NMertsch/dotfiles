@@ -84,3 +84,5 @@ rm $MINICONDA_FILE
 $HOME/.local/etc/miniconda3/bin/conda init
 $HOME/.local/etc/miniconda3/bin/conda install -y python numpy matplotlib scikit-learn scipy numba jupyter seaborn beautifulsoup4
 
+# set timezone
+sudo timedatectl set-timezone Europe/Berlin
