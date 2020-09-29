@@ -17,11 +17,12 @@ alias ll='ls -AhHlF'
 # internet
 alias yt='youtube-dl --add-metadata -ic'  # download video
 alias yta='youtube-dl --add-metadata -ica'  # download audio
+
 mpv-twitch() {
-    i3-msg exec "mpv https://twitch.tv/$1"
+    i3-msg exec "mpv https://twitch.tv/$1" >/dev/null
 }
 mpv-video() {
-    i3-msg exec "mpv '$1'"
+    i3-msg exec "mpv '$1'" >/dev/null
 }
 
 # workaround so that aliases work with sudo
