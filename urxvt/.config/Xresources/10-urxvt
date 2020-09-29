@@ -2,13 +2,12 @@
 URxvt.termName: xterm-256color
 URxvt.iso14755: false
 URxvt.iso14755_52: false
+URxvt.keysym.Control-Left:   \033[1;5D
+URxvt.keysym.Control-Right:  \033[1;5C
 
 ! appearance
 URxvt.scrollBar: false
 URxvt.font: xft:Noto Mono:style=Regular:size=11:antialias=true
-URxvt.boldFont: xft:Noto Mono:style=Bold:size=11
-URxvt.italicFont: xft:Noto Mono:style=Italic:size=11
-URxvt.boldItalicFont: xft:Noto Mono:style=Bold Italic:size=11
 
 ! extensions
 URxvt.perl-ext-common: default,resize-font
