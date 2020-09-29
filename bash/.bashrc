@@ -49,7 +49,7 @@ if ! shopt -oq posix; then
 fi
 
 # prompt
-PS1="\w\$ "
+PS1="\[\e[1m\]\w\[\e[0m\] \$ "
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
