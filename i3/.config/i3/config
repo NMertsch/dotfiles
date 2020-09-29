@@ -20,7 +20,9 @@ bindsym $mod+d exec rofi -show drun -display-drun 'Run'
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec dmenu-exit
 bindsym Print exec screenshot -s
+bindsym $mod+i exec screenshot -s
 bindsym Shift+Print exec screenshot
+bindsym $mod+Shift+i exec screenshot
 bindsym $mod+n exec $mount
 bindsym $mod+Shift+n exec $unmount
 bindsym $mod+Shift+Ctrl+r exec displayselect
