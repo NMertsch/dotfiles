@@ -1,0 +1,18 @@
+#!/bin/sh
+# usage: `xkbmap-toggle us de` toggles between the us and german keyboard layout
+
+current=`setxkbmap -query | grep ^layout | awk '{print $2}'`
+layouts="$@"
+first="$1"
+
+test -z "$first" && notify-send 'setxkbmap' 'No layout specified' >/dev/null && exit 1
+
+next_is_target=0
+for layout in "$@"; do
+    test "$layout" = "$current" && next_is_target=1 && continue
+    test $next_is_target -eq 1 && target="$layout" && break
+done
+test -z "$target" && target="$first"
+
+setxkbmap "$target"
+notify-send -t 500 -r 1337 'setxkbmap' "Set layout to $target" >/dev/null

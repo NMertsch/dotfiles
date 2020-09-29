@@ -27,6 +27,7 @@ bindsym $mod+Shift+Ctrl+r exec displayselect
 bindsym $mod+z exec i3-move-to-new-workspace
 bindsym $mod+Shift+z exec i3-move-to-new-workspace --move
 bindsym $mod+c split v; focus right; move left
+bindsym $mod+t exec xkbmap-toggle us de
 
 # change focus
 bindsym $mod+h focus left
@@ -207,4 +208,3 @@ bar {
 # autostart
 exec --no-startup-id $dropdown_python
 exec --no-startup-id $dropdown_terminal
-
