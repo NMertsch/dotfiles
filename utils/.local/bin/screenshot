@@ -1,7 +1,7 @@
 #!/bin/bash
 # incorporated tools: scrot, xclip, dmenu, notify-send, feh
 for prog in scrot xclip dmenu notify-send feh; do
-    which $prog || notify-send "Missing dependency" "$prog"
+    which $prog >/dev/null || notify-send "Missing dependency" "$prog"
 done
 
 temp_fname="$(mktemp).png"
