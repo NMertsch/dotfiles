@@ -1,5 +1,10 @@
 $include /etc/inputrc
 
-set bell-style visible
 set mark-directories on
 set mark-symlinked-directories on
+set colored-stats on
+set completion-ignore-case on
+set completion-prefix-display-length 3
+set show-all-if-ambiguous on
+set show-all-if-unmodified on
+set visible-stats on
