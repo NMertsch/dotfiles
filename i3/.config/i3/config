@@ -185,7 +185,7 @@ client.background       $bg
 
 # scratchpad tools
 ## dropdown python
-set $dropdown_python urxvt-client -title "dropdown python" -e bash -c "python -ic 'import os, sys, numpy as np, matplotlib.pyplot as plt, scipy.stats'"
+set $dropdown_python urxvt-client -title "dropdown python" -e bash -c "python -i ~/.config/i3/scripts/dropdown-python-imports.py"
 bindsym $mod+m [title="dropdown python"] scratchpad show; [title="dropdown python"] move position center
 bindsym $mod+Shift+m exec $dropdown_python
 for_window [title="dropdown python"] floating enable
