@@ -85,3 +85,8 @@ $HOME/.local/etc/miniconda3/bin/conda install -y python numpy matplotlib scikit-
 
 # set timezone
 sudo timedatectl set-timezone Europe/Berlin
+
+# check for missing gpu drivers and install recommended
+sudo apt install -y ubuntu-drivers-common
+recommended_driver=`ubuntu-drivers devices | sed -rn 's/^driver *: ([a-z0-9-]*) .*recommended$/\1/p'`
+test -n "$recommended_driver" && sudo apt install -y "$recommended_driver"
