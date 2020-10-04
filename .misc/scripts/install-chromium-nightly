@@ -1,0 +1,15 @@
+#!/bin/bash
+
+wget https://download-chromium.appspot.com/dl/Linux_x64?type=snapshots -O chrome-linux.zip
+unzip chrome-linux.zip
+rm chrome-linux.zip
+mv chrome-linux/ ~/.local/etc
+
+ln -s $HOME/.local/etc/chrome-linux/chrome $HOME/.local/bin/chromium
+
+echo "[Desktop Entry]
+Name=Chromium Nightly
+TryExec=chromium
+Exec=chromium
+Type=Application
+StartupNotify=true" > ~/.local/share/applications/chromium-nightly.desktop
