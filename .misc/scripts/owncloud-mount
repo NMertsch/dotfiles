@@ -41,4 +41,4 @@ echo
 echo "$OWNCLOUD_WEBDAV_URL/ $username $password" >> $DAVFS2_CONFIG_DIR/secrets
 
 # add mounting information
-echo "$OWNCLOUD_WEBDAV_URL/ $MOUNT_DIR davfs user,rw,noauto 0 0" | sudo tee --append /etc/fstab >/dev/null
+echo "$OWNCLOUD_WEBDAV_URL/ $MOUNT_DIR davfs user,ro,noauto 0 0" | sudo tee --append /etc/fstab >/dev/null
