@@ -1,0 +1,25 @@
+#!/bin/bash
+
+badfiles=(
+    /usr/share/applications/yelp.desktop
+    /usr/share/applications/thunar-bulk-rename.desktop
+    /usr/share/applications/emacs.desktop
+    /usr/share/applications/emacs-term.desktop
+    /usr/share/applications/vim.desktop
+    /usr/share/applications/thunar-settings.desktop
+    /usr/share/applications/info.desktop
+    /usr/share/applications/exo-web-browser.desktop
+    /usr/share/applications/exo-file-manager.desktop
+    /usr/share/applications/exo-mail-reader.desktop
+    /usr/share/applications/exo-preferred-applications.desktop
+    /usr/share/applications/exo-web-browser.desktop
+    /usr/share/applications/exo-terminal-emulator.desktop
+    /usr/share/applications/nvidia-settings.desktop
+)
+
+for file in "${badfiles[@]}"; do
+    # if Hidden is already defined, set it to true
+    grep -i '^Hidden=' "$file" >/dev/null && sudo sed -i 's/^Hidden=.*$/Hidden=true/' "$file" && continue
+    # else add Hidden=true
+    echo "Hidden=true" | sudo tee -a "$file" >/dev/null
+done
