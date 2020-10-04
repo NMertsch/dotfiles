@@ -9,8 +9,8 @@
 # quotes in "<string>" are not escaped properly. This is a problem with the output of `xprop`,
 # reported upstream: https://bugs.freedesktop.org/show_bug.cgi?id=66807
 
-which xwininfo || notify-send "Missing dependency" "xwininfo (from x11-utils)"
-which xwininfo || notify-send "Missing dependency" "xprop (from x11-utils)"
+which xwininfo >/dev/null || notify-send "Missing dependency" "xwininfo (from x11-utils)"
+which xprop >/dev/null || notify-send "Missing dependency" "xprop (from x11-utils)"
 
 PROGNAME=`basename "$0"`
 
