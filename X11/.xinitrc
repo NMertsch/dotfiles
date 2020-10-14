@@ -15,6 +15,9 @@ if [ -d ~/.config/Xresources ]; then
     xrdb -merge $tmp
 fi
 
+# apply key mapping
+test -f ~/.config/xmodmap.conf && xmodmap ~/.config/xmodmap.conf
+
 # enable numpad
 which numlockx > /dev/null && numlockx on &
 
