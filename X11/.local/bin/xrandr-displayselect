@@ -146,7 +146,5 @@ else
     fi
 fi
 
-wallpaper-setter
 pgrep -x dunst >/dev/null && killall dunst && setsid --fork dunst # Restart dunst to ensure proper location on screen
 i3-msg restart >/dev/null
-polybar-launch
