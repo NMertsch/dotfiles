@@ -30,8 +30,10 @@ sleep 0.2  # needed to load glib resources, but can be shortened depending on sy
 err=$(scrot $sel_cmd $temp_fname 2>&1 >/dev/null)
 
 # error handling
-key_abort=$(echo "$err" | grep -o "Key was pressed")
+key_abort=$(echo "$err" | grep "Key was pressed")
 [[ ! "$key_abort" = "" ]] && exit
+busy_abort=$(echo "$err" | grep "couldn't grab pointer")
+[[ ! "$busy_abort" = "" ]] && exit
 [[ ! "$err" = "" ]] && notify-send "Failed to take screenshot" "$err" -u critical
 
 # menu: action
