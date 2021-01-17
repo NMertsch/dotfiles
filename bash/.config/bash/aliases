@@ -13,6 +13,7 @@ alias mkdir="mkdir -vp"
 
 alias l="ls"
 alias ll='ls -AhHlF'
+alias la='ls -A'
 
 # internet
 alias yt='youtube-dl --add-metadata -ic'  # download video
@@ -25,5 +26,8 @@ mpv-video() {
     i3-msg exec "mpv '$1'" >/dev/null
 }
 
-# workaround so that aliases work with sudo
+# make aliases work with sudo
 alias sudo="sudo "
+
+# make wget store its cache file where it belongs
+alias wget="wget --hsts-file=$HOME/.cache/wget-hsts"

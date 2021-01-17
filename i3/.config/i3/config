@@ -165,6 +165,9 @@ for_window [class="Matplotlib"] floating enable
 for_window [class=" " instance=" " title="^Figure"] floating enable
 ## JetBrains IDE (IntelliJ, PyCharm, ...) loading screen
 for_window [title="^win0$"] floating enable
+## SDF
+for_window [title="^SDF Converter$"] floating enable
+#for_window [title="^SDF Browser$"] floating enable
 
 # Colors
 set_from_resource $bg i3.bg

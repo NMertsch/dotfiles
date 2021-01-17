@@ -13,7 +13,15 @@ if [ -d ~/.config/Xresources ]; then
     tmp=`mktemp`
     cat ~/.config/Xresources/* > $tmp
     xrdb -merge $tmp
+    rm $tmp
 fi
+
+# resolve GTK apps launching slowly
+## https://bbs.archlinux.org/viewtopic.php?id=224787
+dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
+
+# apply key mapping
+test -f ~/.config/xmodmap.conf && xmodmap ~/.config/xmodmap.conf
 
 # enable numpad
 which numlockx > /dev/null && numlockx on &
