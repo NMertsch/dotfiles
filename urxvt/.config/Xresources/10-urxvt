@@ -9,6 +9,11 @@ URxvt.keysym.Control-Right:  \033[1;5C
 URxvt.scrollBar: false
 URxvt.font: xft:Noto Mono:style=Regular:size=11:antialias=true
 
+! disable autoscroll on output
+URxvt.scrollTtyOutput: false
+URxvt.scrollWithBuffer: true
+URxvt.scrollTtyKeypress: true
+
 ! extensions
 URxvt.perl-ext-common: default,resize-font
 ! ! resize (ext: resize-font)
