@@ -90,3 +90,7 @@ sudo timedatectl set-timezone Europe/Berlin
 sudo apt install -y ubuntu-drivers-common
 recommended_driver=`ubuntu-drivers devices | sed -rn 's/^driver *: ([a-z0-9-]*) .*recommended$/\1/p'`
 test -n "$recommended_driver" && sudo apt install -y "$recommended_driver"
+
+# set x-terminal-emulator to urxvt-client
+sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator $HOME/.local/bin/urxvt-client 100
+sudo update-alternatives --set x-terminal-emulator $HOME/.local/bin/urxvt-client
