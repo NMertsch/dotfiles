@@ -47,6 +47,15 @@ mkdir -p ~/.local/share/applications ~/.config ~/.config/Xresources
 # remove swap entry from fstab, if no swap is configured (would lead to error message during boot)
 test -z `swapon --show` && sudo sed -i '/swap/d' /etc/fstab
 
+# install Source Code Pro font
+SCP_FONT_DIR=".local/share/fonts/SourceCodePro"
+mkdir -p "$SCP_FONT_DIR"
+git clone https://github.com/adobe-fonts/source-code-pro "$SCP_FONT_DIR"/source-code-pro
+mv "$SCP_FONT_DIR"/source-code-pro/TTF/*.ttf "$SCP_FONT_DIR"
+rm -r "$SCP_FONT_DIR"/source-code-pro
+unset "$SCP_FONT_DIR"
+fc-cache -f
+
 # link configuration
 ## remove files to be replaced
 test -f ~/.bashrc && rm ~/.bashrc

@@ -7,7 +7,7 @@ URxvt.keysym.Control-Right:  \033[1;5C
 
 ! appearance
 URxvt.scrollBar: false
-URxvt.font: xft:Noto Mono:style=Regular:size=11:antialias=true
+URxvt.font: xft:Source Code Pro:style=Regular:size=11:antialias=true
 
 ! disable autoscroll on output
 URxvt.scrollTtyOutput: false
