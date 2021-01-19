@@ -1,0 +1,2 @@
+# https://forums.linuxmint.com/viewtopic.php?t=310926
+echo 'blacklist ucsi_ccg' | sudo tee /etc/modprobe.d/blacklist-nvidia-usb.conf >/dev/null
