@@ -1,3 +1,6 @@
+# Microsoft .NET telemetry opt-out
+export DOTNET_CLI_TELEMETRY_OPTOUT=true
+
 # XDG base directories
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
