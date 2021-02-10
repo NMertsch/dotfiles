@@ -1,16 +1,26 @@
 #!/bin/bash
 
-cmd=$(echo "Lock Shutdown Reboot Suspend Logout" | tr " " "\n" | dmenu -i -p "Exit")
+# check if there is a Windows boot entry
+windows_title=$(grep -i windows /boot/grub/grub.cfg | cut -d "'" -f 2)
+if [[ -z "$windows_title" ]]; then
+    options="Lock Shutdown Reboot Suspend Logout"
+else
+    options="Lock Shutdown Reboot Windows Suspend Logout"
+fi
+
+cmd=$(echo "$options" | tr " " "\n" | dmenu -i -p "Exit")
 [[ "$cmd" = "" ]] && exit
 
 if [[ "$cmd" = "Lock" ]]; then
-    i3lock -c 2f343f
+    i3lock -c 000000
 elif [[ "$cmd" = "Shutdown" ]]; then
     systemctl poweroff
 elif [[ "$cmd" = "Suspend" ]]; then
     systemctl suspend
 elif [[ "$cmd" = "Reboot" ]]; then
     systemctl reboot
+elif [[ "$cmd" = "Windows" ]]; then
+    sudo grub-reboot "$windows_title" && systemctl reboot
 elif [[ "$cmd" = "Logout" ]]; then
     i3-msg exit
 fi
