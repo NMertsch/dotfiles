@@ -1,0 +1,17 @@
+from operator import attrgetter
+import subprocess
+import sys
+
+from pykeepass import PyKeePass
+
+kdbx_file = sys.argv[1]
+pw_file = sys.argv[2]
+
+db = PyKeePass(kdbx_file, password=open(pw_file).read()[:-1])
+all_titles = [f'{entry.title} ({entry.username})' for entry in db.entries]
+
+title = subprocess.run('dmenu -p KeePass', shell=True, input='\n'.join(all_titles), encoding='utf-8', capture_output=True).stdout.rstrip('\n')
+
+if title in all_titles:
+    password = db.entries[all_titles.index(title)].password.strip()
+    subprocess.run('xclip -selection clipboard', shell=True, encoding='utf-8', input=password)
