@@ -1,13 +1,17 @@
+#!/usr/bin/python3
+import argparse
 from operator import attrgetter
 import subprocess
 import sys
 
 from pykeepass import PyKeePass
 
-kdbx_file = sys.argv[1]
-pw_file = sys.argv[2]
+parser = argparse.ArgumentParser(description="Keepass password menu")
+parser.add_argument("kdbx_file")
+parser.add_argument("pw_file")
+args = parser.parse_args()
 
-db = PyKeePass(kdbx_file, password=open(pw_file).read()[:-1])
+db = PyKeePass(args.kdbx_file, password=open(args.pw_file).read()[:-1])
 all_titles = [f'{entry.title} ({entry.username})' for entry in db.entries]
 
 title = subprocess.run('dmenu -p KeePass', shell=True, input='\n'.join(all_titles), encoding='utf-8', capture_output=True).stdout.rstrip('\n')
