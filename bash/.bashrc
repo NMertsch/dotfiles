@@ -13,6 +13,7 @@ HISTFILE="$XDG_DATA_HOME"/bash_history
 HISTSIZE= HISTFILESIZE=  # don't ever discard history
 HISTCONTROL=ignoreboth  # don't save duplicate lines or lines starting with space
 shopt -s histappend  # append, don't overwrite history
+shopt -s dotglob  # include hidden files in glob expansions
 
 # bash settings
 shopt -s checkwinsize  # resize LINES and COLUMNS after each command
