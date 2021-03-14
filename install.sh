@@ -103,3 +103,6 @@ test -n "$recommended_driver" && sudo apt install -y "$recommended_driver"
 # set x-terminal-emulator to urxvt-client
 sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator $HOME/.local/bin/urxvt-client 100
 sudo update-alternatives --set x-terminal-emulator $HOME/.local/bin/urxvt-client
+
+# don't require password for sudo
+echo $USER 'ALL=(ALL) NOPASSWD:ALL' | sudo tee >/dev/null /etc/sudoers.d/10-nopasswd
