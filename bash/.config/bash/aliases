@@ -23,7 +23,11 @@ mpv-twitch() {
     i3-msg exec "mpv https://twitch.tv/$1" >/dev/null
 }
 mpv-video() {
-    i3-msg exec "mpv '$1'" >/dev/null
+    if [ -f "$1" ]; then
+        i3-msg exec "mpv `pwd`/$1" >/dev/null
+    else
+        i3-msg exec "mpv '$1'" >/dev/null
+    fi
 }
 
 # make aliases work with sudo
