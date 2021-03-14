@@ -1,0 +1,22 @@
+#!/bin/bash
+set -e
+
+sudo apt install -y samba cifs-utils
+
+echo -n "FRITZ!NAS IP: "
+read fritzip
+echo -n "Path to mount (e.g. FRITZ.NAS/hdd): "
+read fritzpath
+echo -n "Username: "
+read username
+echo -n "Password: "
+read -s password
+echo
+
+credfile=$HOME/.config/smbcredentials
+printf "username=$username\npassword=$password\n" > $credfile
+
+fritzdir=$HOME/fritz-nas
+mkdir -p $fritzdir
+
+echo //$fritzip/$fritzpath $fritzdir cifs credentials=$credfile,vers=3.0,noserverino,noauto,users 0 0 | sudo tee -a >/dev/null /etc/fstab
