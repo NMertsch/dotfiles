@@ -23,8 +23,6 @@ mkdir -p "$XDG_CONFIG_HOME"/less
 export LESSKEY="$XDG_CONFIG_HOME"/less/lesskey
 export LESSHISTFILE="$XDG_CONFIG_HOME"/less/history
 
-export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
-
 export DVDCSS_CACHE="$XDG_DATA_HOME"/dvdcss
 
 # others

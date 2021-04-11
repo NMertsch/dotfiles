@@ -310,7 +310,7 @@
 
     # Close notification. Equivalent dunstctl command:
     # dunstctl close
-    # close = ctrl+space
+    close = ctrl+space
 
     # Close all notifications. Equivalent dunstctl command:
     # dunstctl close-all

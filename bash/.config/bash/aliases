@@ -19,9 +19,6 @@ alias la='ls -A'
 alias yt='youtube-dl --add-metadata -ic'  # download video
 alias yta='youtube-dl --add-metadata -ica'  # download audio
 
-mpv-twitch() {
-    i3-msg exec "mpv https://twitch.tv/$1" >/dev/null
-}
 mpv-video() {
     if [ -f "$1" ]; then
         i3-msg exec "mpv `pwd`/$1" >/dev/null
