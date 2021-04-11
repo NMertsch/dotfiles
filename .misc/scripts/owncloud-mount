@@ -23,7 +23,7 @@ sudo usermod -aG davfs2 $USER
 # create mount point directory
 mkdir -p $MOUNT_DIR
 # set up davfs2 config directory
-DAVFS2_CONFIG_DIR=~/.davfs2
+DAVFS2_CONFIG_DIR=$HOME/.davfs2
 mkdir -p $DAVFS2_CONFIG_DIR
 sudo cp /etc/davfs2/secrets $DAVFS2_CONFIG_DIR
 sudo chown $USER:$USER $DAVFS2_CONFIG_DIR/secrets
