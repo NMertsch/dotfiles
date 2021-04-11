@@ -1,15 +1,27 @@
 #!/bin/bash
 
-wget https://download-chromium.appspot.com/dl/Linux_x64?type=snapshots -O chrome-linux.zip
-unzip chrome-linux.zip
-rm chrome-linux.zip
-mv chrome-linux/ ~/.local/etc
+# download, extract archive
+ZIP_FILE=chrome-linux.zip
+wget https://download-chromium.appspot.com/dl/Linux_x64?type=snapshots -O $ZIP_FILE
+unzip $ZIP_FILE
+rm $ZIP_FILE
 
-ln -s $HOME/.local/etc/chrome-linux/chrome $HOME/.local/bin/chromium
+# move
+TARGET_DIR=$HOME/.local/etc
+CHROME_DIR=$TARGET_DIR/chrome-linux
+test -d $CHROME_DIR && rm -rf $CHROME_DIR
+mv chrome-linux/ $TARGET_DIR
 
+# link binary
+BIN_FILE=$HOME/.local/bin/chromium
+test -f $BIN_FILE && rm $BIN_FILE
+ln -s $CHROME_DIR/chrome $BIN_FILE
+
+# add desktop entry
 echo "[Desktop Entry]
 Name=Chromium Nightly
 TryExec=chromium
 Exec=chromium
 Type=Application
+Icon=$CHROME_DIR/product_logo_48.png
 StartupNotify=true" > ~/.local/share/applications/chromium-nightly.desktop

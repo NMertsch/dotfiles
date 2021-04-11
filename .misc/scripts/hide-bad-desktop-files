@@ -15,6 +15,9 @@ badfiles=(
     /usr/share/applications/exo-web-browser.desktop
     /usr/share/applications/exo-terminal-emulator.desktop
     /usr/share/applications/nvidia-settings.desktop
+    /usr/share/applications/im-config.desktop
+    /usr/share/applications/org.freedesktop.IBus.Setup.desktop
+    /usr/share/applications/rxvt-unicode.desktop
 )
 
 for file in "${badfiles[@]}"; do
