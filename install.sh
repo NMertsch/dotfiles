@@ -75,6 +75,7 @@ stow rofi -t ~
 stow urxvt -t ~
 stow utils -t ~
 stow X11 -t ~
+stow xmodmap -t ~
 
 # install necessary packages
 sudo apt install -y i3 pulseaudio
