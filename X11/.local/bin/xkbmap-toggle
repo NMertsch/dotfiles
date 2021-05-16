@@ -15,5 +15,5 @@ done
 test -z "$target" && target="$first"
 
 setxkbmap "$target"
-xmodmap ~/.config/xmodmap.conf
+test -f ~/.config/xmodmap-`hostname`.conf && xmodmap ~/.config/xmodmap-`hostname`.conf
 notify-send -t 500 -r 1337 'setxkbmap' "Set layout to $target" >/dev/null

@@ -24,7 +24,7 @@ which davmail && davmail -server -notray >/dev/null 2>/dev/null &
 dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
 
 # apply key mapping
-test -f ~/.config/xmodmap.conf && xmodmap ~/.config/xmodmap.conf
+test -f ~/.config/xmodmap-`hostname`.conf && xmodmap ~/.config/xmodmap-`hostname`.conf
 
 # enable numpad
 which numlockx > /dev/null && numlockx on &
