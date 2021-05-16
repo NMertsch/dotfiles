@@ -16,6 +16,9 @@ if [ -d ~/.config/Xresources ]; then
     rm $tmp
 fi
 
+# start davmail server if available
+which davmail && davmail -server -notray >/dev/null 2>/dev/null &
+
 # resolve GTK apps launching slowly
 ## https://bbs.archlinux.org/viewtopic.php?id=224787
 dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY

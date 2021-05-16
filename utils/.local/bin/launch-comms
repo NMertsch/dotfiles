@@ -1,4 +1,4 @@
 #/bin/sh
-for prog in telegram-desktop thunderbird signal-desktop 'firefox -new-window https://chat.gwdg.de -new-window https://web.whatsapp.com'; do
+for prog in telegram-desktop thunderbird signal-desktop 'firefox -new-window https://chat.gwdg.de -new-window https://web.whatsapp.com' slack; do
     $prog >/dev/null 2>/dev/null &
 done
