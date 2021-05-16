@@ -17,9 +17,8 @@ set -x
 # remove server-specific packages (-> ubuntu minimal)
 sudo apt update -y
 sudo apt install git
-sudo snap remove --purge lxd
-tmp=`mktemp`
-sudo apt remove -y --auto-remove --purge cloud-init snapd ubuntu-server | tee $tmp
+which snap && sudo snap remove --purge lxd
+sudo apt remove -y --auto-remove --purge cloud-init snapd ubuntu-server
 
 # upgrade installed packages
 sudo DEBIAN_FRONTEND=noninteractive apt full-upgrade -y
@@ -27,11 +26,11 @@ sudo apt autoremove -y
 
 # set up some directories
 ## home directories and shortcuts (-p to resume when they already exist)
-mkdir -p ~/Documents && ln -s $HOME/Documents $HOME/doc
-mkdir -p ~/Pictures && ln -s $HOME/Pictures $HOME/pic
-mkdir -p ~/Downloads && ln -s $HOME/Downloads $HOME/dl
-mkdir -p ~/Videos && ln -s $HOME/Videos $HOME/vid
-mkdir -p ~/Projects && ln -s $HOME/Projects $HOME/git
+mkdir -p ~/Documents
+mkdir -p ~/Pictures
+mkdir -p ~/Downloads
+mkdir -p ~/Videos
+mkdir -p ~/Projects
 mkdir -p  ~/Desktop
 
 ## mounts points for usb devices
@@ -48,12 +47,13 @@ mkdir -p ~/.local/share/applications ~/.config ~/.config/Xresources
 test -z `swapon --show` && sudo sed -i '/swap/d' /etc/fstab
 
 # install Source Code Pro font
-SCP_FONT_DIR=".local/share/fonts/SourceCodePro"
+SCP_FONT_DIR="$HOME/.local/share/fonts/SourceCodePro"
 mkdir -p "$SCP_FONT_DIR"
 git clone https://github.com/adobe-fonts/source-code-pro "$SCP_FONT_DIR"/source-code-pro
 mv "$SCP_FONT_DIR"/source-code-pro/TTF/*.ttf "$SCP_FONT_DIR"
-rm -r "$SCP_FONT_DIR"/source-code-pro
-unset "$SCP_FONT_DIR"
+rm -rf "$SCP_FONT_DIR"/source-code-pro
+unset SCP_FONT_DIR
+sudo apt install -y fontconfig
 fc-cache -f
 
 # link configuration
