@@ -155,6 +155,8 @@ for_window [class=" " instance=" " title="^Figure"] floating enable
 ## JetBrains IDE (IntelliJ, PyCharm, ...) loading screen
 for_window [title="^win0$"] floating enable
 for_window [title="^JetBrains Toolbox$"] floating enable
+for_window [class="^jetbrains-" title="^Import .* Settings$"] floating enable
+for_window [class="^jetbrains-" title="^Customize "] floating enable
 ## Tabbed
 for_window [class="Thunderbird"] layout tabbed
 
