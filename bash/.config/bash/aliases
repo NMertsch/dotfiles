@@ -27,6 +27,8 @@ mpv-video() {
     fi
 }
 
+alias mpv-audio='mpv --video=no'
+
 # make aliases work with sudo
 alias sudo="sudo "
 
