@@ -3,9 +3,9 @@
 # check if there is a Windows boot entry
 windows_title=$(grep -i windows /boot/grub/grub.cfg | cut -d "'" -f 2)
 if [[ -z "$windows_title" ]]; then
-    options="Lock Shutdown Reboot Suspend Logout"
+    options="Lock Shutdown Reboot BIOS Suspend Logout"
 else
-    options="Lock Shutdown Reboot Windows Suspend Logout"
+    options="Lock Shutdown Reboot Windows BIOS Suspend Logout"
 fi
 
 cmd=$(echo "$options" | tr " " "\n" | dmenu -i -p "Exit")
@@ -19,6 +19,8 @@ elif [[ "$cmd" = "Suspend" ]]; then
     systemctl suspend
 elif [[ "$cmd" = "Reboot" ]]; then
     systemctl reboot
+elif [[ "$cmd" = "BIOS" ]]; then
+    systemctl reboot --firmware-setup
 elif [[ "$cmd" = "Windows" ]]; then
     sudo grub-reboot "$windows_title" && systemctl reboot
 elif [[ "$cmd" = "Logout" ]]; then
