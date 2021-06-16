@@ -1,0 +1,10 @@
+#!/bin/sh
+
+group=$(dmenu -p Group)
+[ "$group" = "" ] && exit 1
+user=$(dmenu -p Username)
+[ "$user" = "" ] && exit 1
+pw=$(dmenu -password -p Password)
+[ "$pw" = "" ] && exit 1
+
+echo "$pw" | sudo openconnect --user "$user" --passwd-on-stdin vpn.med.uni-goettingen.de/"$group"

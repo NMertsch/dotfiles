@@ -5,4 +5,4 @@ user=$(dmenu -p Username)
 pw=$(dmenu -password -p Password)
 [ "$pw" = "" ] && exit 1
 
-echo "$pw" | sudo openconnect --user "$user" --passwd-on-stdin vpn-c.gwdg.de
+echo "$pw" | sudo openconnect --user "$user" --passwd-on-stdin vpn.gwdg.de
