@@ -25,6 +25,8 @@ export LESSHISTFILE="$XDG_CONFIG_HOME"/less/history
 
 export DVDCSS_CACHE="$XDG_DATA_HOME"/dvdcss
 
+test -d "$HOME/.platformio/penv/bin" && PATH="$HOME/.platformio/penv/bin"
+
 # others
 export EDITOR="nano"
 
@@ -36,6 +38,11 @@ fi
 # add ~/bin to PATH
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
+fi
+
+# add /snap/bin to PATH
+if [ -d "/snap/bin" ] ; then
+    PATH="/snap/bin:$PATH"
 fi
 
 # start i3 on tty-login
